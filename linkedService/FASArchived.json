@@ -1,0 +1,15 @@
+{
+	"name": "FASArchived",
+	"properties": {
+		"annotations": [],
+		"type": "Web",
+		"typeProperties": {
+			"url": "https://www.fairfaxadultsoftball.com/c.php?p=1356&Archived=2022#",
+			"authenticationType": "Anonymous"
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
