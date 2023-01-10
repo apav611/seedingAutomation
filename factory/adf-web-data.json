@@ -1,0 +1,9 @@
+{
+	"name": "adf-web-data",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c6498656-f604-4af5-ae31-29e3dfee9cad",
+		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+	}
+}

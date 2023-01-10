@@ -1,0 +1,16 @@
+{
+	"name": "FallMenThursday3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FallMenThursday3",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "WebTable",
+		"schema": [],
+		"typeProperties": {
+			"index": 0
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
