@@ -7,6 +7,18 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-web-data"
 		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
+		"FASArchived_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://www.fairfaxadultsoftball.com/c.php?p=1356&Archived=2022#"
+		},
+		"FallMenThursday1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://www.fairfaxadultsoftball.com/c.php?p=365&Season=F&League=FM&Division=H1&SelectedTeam=All+Teams&Year=2022"
+		},
 		"FallMenThursday2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://www.fairfaxadultsoftball.com/c.php?p=365&Season=F&League=FM&Division=H2&SelectedTeam=All+Teams&Year=2022"
@@ -19,15 +31,76 @@
 			"type": "string",
 			"defaultValue": "https://www.fairfaxadultsoftball.com/c.php?p=365&Season=F&League=FM&Division=H4&SelectedTeam=All+Teams&Year=2022"
 		},
-		"FASArchived_properties_typeProperties_url": {
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://www.fairfaxadultsoftball.com/c.php?p=1356&Archived=2022#"
+			"defaultValue": "https://safasseeding.dfs.core.windows.net/"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/FASArchived')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "FASArchived",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "WebTable",
+				"schema": [],
+				"typeProperties": {
+					"index": 0,
+					"path": ""
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/FASArchived')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FallMenThursday1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "FallMenThursday1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "WebTable",
+				"schema": [],
+				"typeProperties": {
+					"index": 0
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/FallMenThursday1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FallMenThursday2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "FallMenThursday2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "WebTable",
+				"schema": [],
+				"typeProperties": {
+					"index": 0
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/FallMenThursday2')]"
+			]
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/FallMenThursday3')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -66,6 +139,46 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/FallMenThursday4')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FASArchived')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Web",
+				"typeProperties": {
+					"url": "[parameters('FASArchived_properties_typeProperties_url')]",
+					"authenticationType": "Anonymous"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FallMenThursday1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Web",
+				"typeProperties": {
+					"url": "[parameters('FallMenThursday1_properties_typeProperties_url')]",
+					"authenticationType": "Anonymous"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
 			]
 		},
 		{
@@ -139,44 +252,102 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/FASArchived')]",
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "WebSource"
+							},
+							"sink": {
+								"type": "JsonSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "JsonWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "FallMenThursday4",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Json1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/FallMenThursday4')]",
+				"[concat(variables('factoryId'), '/datasets/Json1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"type": "Web",
+				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('FASArchived_properties_typeProperties_url')]",
-					"authenticationType": "Anonymous"
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
+					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					}
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
-			]
+			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/FASArchived')]",
+			"name": "[concat(parameters('factoryName'), '/Json1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "FASArchived",
+					"referenceName": "AzureDataLakeStorage1",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "WebTable",
-				"schema": [],
+				"type": "Json",
 				"typeProperties": {
-					"index": 0,
-					"path": ""
-				}
+					"location": {
+						"type": "AzureBlobFSLocation"
+					}
+				},
+				"schema": {}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/FASArchived')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
 			]
 		}
 	]
