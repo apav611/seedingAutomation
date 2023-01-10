@@ -5,11 +5,17 @@
 		"factoryName": {
 			"value": "adf-web-data"
 		},
+		"FallMenThursday2_properties_typeProperties_url": {
+			"value": "https://www.fairfaxadultsoftball.com/c.php?p=365&Season=F&League=FM&Division=H2&SelectedTeam=All+Teams&Year=2022"
+		},
 		"FallMenThursday3_properties_typeProperties_url": {
 			"value": "https://www.fairfaxadultsoftball.com/c.php?p=365&Season=F&League=FM&Division=H3&SelectedTeam=All+Teams&Year=2022"
 		},
 		"FallMenThursday4_properties_typeProperties_url": {
 			"value": "https://www.fairfaxadultsoftball.com/c.php?p=365&Season=F&League=FM&Division=H4&SelectedTeam=All+Teams&Year=2022"
+		},
+		"FASArchived_properties_typeProperties_url": {
+			"value": "https://www.fairfaxadultsoftball.com/c.php?p=1356&Archived=2022#"
 		}
 	}
 }

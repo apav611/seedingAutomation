@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-web-data"
 		},
+		"FallMenThursday2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://www.fairfaxadultsoftball.com/c.php?p=365&Season=F&League=FM&Division=H2&SelectedTeam=All+Teams&Year=2022"
+		},
 		"FallMenThursday3_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://www.fairfaxadultsoftball.com/c.php?p=365&Season=F&League=FM&Division=H3&SelectedTeam=All+Teams&Year=2022"
@@ -14,6 +18,10 @@
 		"FallMenThursday4_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://www.fairfaxadultsoftball.com/c.php?p=365&Season=F&League=FM&Division=H4&SelectedTeam=All+Teams&Year=2022"
+		},
+		"FASArchived_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://www.fairfaxadultsoftball.com/c.php?p=1356&Archived=2022#"
 		},
 		"containerUri": {
 			"type": "string",
@@ -42,11 +50,17 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"FallMenThursday2_properties_typeProperties_url": {
+						"value": "[parameters('FallMenThursday2_properties_typeProperties_url')]"
+					},
 					"FallMenThursday3_properties_typeProperties_url": {
 						"value": "[parameters('FallMenThursday3_properties_typeProperties_url')]"
 					},
 					"FallMenThursday4_properties_typeProperties_url": {
 						"value": "[parameters('FallMenThursday4_properties_typeProperties_url')]"
+					},
+					"FASArchived_properties_typeProperties_url": {
+						"value": "[parameters('FASArchived_properties_typeProperties_url')]"
 					}
 				}
 			},

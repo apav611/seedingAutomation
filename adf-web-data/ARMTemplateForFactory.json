@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-web-data"
 		},
+		"FallMenThursday2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://www.fairfaxadultsoftball.com/c.php?p=365&Season=F&League=FM&Division=H2&SelectedTeam=All+Teams&Year=2022"
+		},
 		"FallMenThursday3_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://www.fairfaxadultsoftball.com/c.php?p=365&Season=F&League=FM&Division=H3&SelectedTeam=All+Teams&Year=2022"
@@ -14,6 +18,10 @@
 		"FallMenThursday4_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://www.fairfaxadultsoftball.com/c.php?p=365&Season=F&League=FM&Division=H4&SelectedTeam=All+Teams&Year=2022"
+		},
+		"FASArchived_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://www.fairfaxadultsoftball.com/c.php?p=1356&Archived=2022#"
 		}
 	},
 	"variables": {
@@ -41,6 +49,46 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/FallMenThursday4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "FallMenThursday4",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "WebTable",
+				"schema": [],
+				"typeProperties": {
+					"index": 0
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/FallMenThursday4')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FallMenThursday2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Web",
+				"typeProperties": {
+					"url": "[parameters('FallMenThursday2_properties_typeProperties_url')]",
+					"authenticationType": "Anonymous"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/FallMenThursday3')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -59,16 +107,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
 			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/integrationRuntime1')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
-			},
-			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/FallMenThursday4')]",
@@ -91,23 +129,54 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/FallMenThursday4')]",
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime1')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FASArchived')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Web",
+				"typeProperties": {
+					"url": "[parameters('FASArchived_properties_typeProperties_url')]",
+					"authenticationType": "Anonymous"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FASArchived')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "FallMenThursday4",
+					"referenceName": "FASArchived",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
 				"type": "WebTable",
 				"schema": [],
 				"typeProperties": {
-					"index": 0
+					"index": 0,
+					"path": ""
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/FallMenThursday4')]"
+				"[concat(variables('factoryId'), '/linkedServices/FASArchived')]"
 			]
 		}
 	]
