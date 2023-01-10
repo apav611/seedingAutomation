@@ -1,0 +1,16 @@
+{
+	"name": "FallMenThursday1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Web",
+		"typeProperties": {
+			"url": "https://www.fairfaxadultsoftball.com/c.php?p=365&Season=F&League=FM&Division=H1&SelectedTeam=All+Teams&Year=2022",
+			"authenticationType": "Anonymous"
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
