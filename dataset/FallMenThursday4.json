@@ -1,0 +1,15 @@
+{
+	"name": "FallMenThursday4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FallMenThursday4",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "WebTable",
+		"schema": [],
+		"typeProperties": {
+			"index": 0
+		}
+	}
+}
