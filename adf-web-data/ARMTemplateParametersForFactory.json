@@ -7,6 +7,9 @@
 		},
 		"FallMenThursday3_properties_typeProperties_url": {
 			"value": "https://www.fairfaxadultsoftball.com/c.php?p=365&Season=F&League=FM&Division=H3&SelectedTeam=All+Teams&Year=2022"
+		},
+		"FallMenThursday4_properties_typeProperties_url": {
+			"value": "https://www.fairfaxadultsoftball.com/c.php?p=365&Season=F&League=FM&Division=H4&SelectedTeam=All+Teams&Year=2022"
 		}
 	}
 }

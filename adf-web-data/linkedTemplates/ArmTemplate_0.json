@@ -10,6 +10,10 @@
 		"FallMenThursday3_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://www.fairfaxadultsoftball.com/c.php?p=365&Season=F&League=FM&Division=H3&SelectedTeam=All+Teams&Year=2022"
+		},
+		"FallMenThursday4_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://www.fairfaxadultsoftball.com/c.php?p=365&Season=F&League=FM&Division=H4&SelectedTeam=All+Teams&Year=2022"
 		}
 	},
 	"variables": {
@@ -47,6 +51,26 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/FallMenThursday4')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Web",
+				"typeProperties": {
+					"url": "[parameters('FallMenThursday4_properties_typeProperties_url')]",
+					"authenticationType": "Anonymous"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/FallMenThursday3')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -64,6 +88,26 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/FallMenThursday3')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FallMenThursday4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "FallMenThursday4",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "WebTable",
+				"schema": [],
+				"typeProperties": {
+					"index": 0
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/FallMenThursday4')]"
 			]
 		}
 	]
