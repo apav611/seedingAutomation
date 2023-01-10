@@ -9,7 +9,8 @@
 		"type": "WebTable",
 		"schema": [],
 		"typeProperties": {
-			"path": "0"
+			"index": 0,
+			"path": ""
 		}
 	}
 }
